@@ -8,7 +8,6 @@ import { useEntries } from "../hooks/useEntries";
 export const Dashboard = () => {
   const { goToNewEntry } = useViewState();
   const { entries, deleteEntry } = useEntries();
-
   const sortedEntries = entries.sort((first, second) =>
     isAfter(second.date, first.date) ? -1 : 1
   );

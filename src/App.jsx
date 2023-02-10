@@ -8,6 +8,7 @@ import { LanguageProvider } from "./context/LanguageProvider";
 import { ViewStateProvider } from "./context/ViewStateProvider";
 import { useViewState } from "./hooks/useViewState";
 import { EntriesProvider } from "./context/EntriesProvider";
+import { NotificationProvider } from "./context/NotificationProvider";
 
 function App() {
   const { viewState } = useViewState();
@@ -31,7 +32,9 @@ const AppWithProviders = () => (
   <LanguageProvider>
     <ViewStateProvider>
       <EntriesProvider>
-        <App />
+        <NotificationProvider>
+          <App />
+        </NotificationProvider>
       </EntriesProvider>
     </ViewStateProvider>
   </LanguageProvider>
