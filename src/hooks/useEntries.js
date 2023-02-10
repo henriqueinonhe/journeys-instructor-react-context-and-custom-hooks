@@ -2,10 +2,12 @@ import { useContext } from "react";
 import { EntriesContext } from "../context/EntriesContext";
 import { entriesStorage } from "../infrastructure/entriesStorage";
 import { useNotification } from "./useNotification";
+import { useTranslation } from "./useTranslation";
 
 export const useEntries = () => {
   const value = useContext(EntriesContext);
   const { showNotification } = useNotification();
+  const { t } = useTranslation();
 
   if (value === undefined) {
     throw new Error("You forgot EntriesProvider!");
@@ -25,7 +27,7 @@ export const useEntries = () => {
 
       entriesStorage.store(updatedEntries);
 
-      showNotification("Entry created!");
+      showNotification(t("entryCreatedNotification"));
 
       return updatedEntries;
     });
@@ -37,7 +39,7 @@ export const useEntries = () => {
 
       entriesStorage.store(updatedEntries);
 
-      showNotification("Entry deleted!");
+      showNotification(t("entryDeletedNotification"));
 
       return updatedEntries;
     });
@@ -58,7 +60,7 @@ export const useEntries = () => {
 
       entriesStorage.store(updatedEntries);
 
-      showNotification("Entry edited!");
+      showNotification(t("entryEditedNotification"));
 
       return updatedEntries;
     });

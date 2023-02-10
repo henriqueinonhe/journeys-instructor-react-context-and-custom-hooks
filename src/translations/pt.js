@@ -7,4 +7,7 @@ export const ptTranslations = {
   amountInput: "Valor",
   dateInput: "Data",
   saveButton: "Salvar",
+  entryCreatedNotification: "Entrada criada!",
+  entryEditedNotification: "Entrada editada!",
+  entryDeletedNotification: "Entrada deletada!",
 };
