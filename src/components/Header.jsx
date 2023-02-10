@@ -1,5 +1,5 @@
-import cx from "./Header.module.scss";
 import { useTranslation } from "../hooks/useTranslation";
+import cx from "./Header.module.scss";
 
 export const Header = () => {
   const { t, language, setLanguage } = useTranslation();

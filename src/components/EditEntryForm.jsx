@@ -1,6 +1,6 @@
 import { EntryForm } from "./EntryForm";
-import { useKeyPressed } from "../hooks/useKeyPressed";
 import { useTranslation } from "../hooks/useTranslation";
+import { useKeyPressed } from "../hooks/useKeyPressed";
 
 export const EditEntryForm = ({
   onSubmit,
