@@ -6,8 +6,11 @@ import { Input } from "./Input";
 import { SaveButton } from "./SaveButton";
 import { useTranslation } from "../hooks/useTranslation";
 import { useKeyPressed } from "../hooks/useKeyPressed";
+import { useViewState } from "../hooks/useViewState";
 
-export const EntryForm = ({ title, goToDashboard, onSubmit, entry }) => {
+export const EntryForm = ({ title, onSubmit, entry }) => {
+  const { goToDashboard } = useViewState();
+
   const initialLabel = entry?.label ?? "";
   const initialAmount = entry?.amount?.toString() ?? "";
   const initialDate = entry
