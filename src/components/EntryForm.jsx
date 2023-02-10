@@ -38,6 +38,7 @@ export const EntryForm = ({ title, onSubmit, entry }) => {
       date: addMinutes(new Date(date), new Date().getTimezoneOffset()),
     };
     onSubmit(entryIntent);
+    goToDashboard();
   });
 
   return (
@@ -56,6 +57,7 @@ export const EntryForm = ({ title, onSubmit, entry }) => {
           };
 
           onSubmit(entryIntent);
+          goToDashboard();
         }}
       >
         <h2 className={cx.title}>{title}</h2>

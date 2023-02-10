@@ -3,9 +3,11 @@ import cx from "./Dashboard.module.scss";
 import { DashboardEntry } from "./DashboardEntry";
 import { isAfter } from "date-fns";
 import { useViewState } from "../hooks/useViewState";
+import { useEntries } from "../hooks/useEntries";
 
-export const Dashboard = ({ entries, onEntryDelete }) => {
+export const Dashboard = () => {
   const { goToNewEntry } = useViewState();
+  const { entries, deleteEntry } = useEntries();
 
   const sortedEntries = entries.sort((first, second) =>
     isAfter(second.date, first.date) ? -1 : 1
@@ -22,7 +24,7 @@ export const Dashboard = ({ entries, onEntryDelete }) => {
           <DashboardEntry
             key={entry.id}
             entry={entry}
-            onDelete={() => onEntryDelete(entry.id)}
+            onDelete={() => deleteEntry(entry.id)}
           />
         ))}
       </ul>
