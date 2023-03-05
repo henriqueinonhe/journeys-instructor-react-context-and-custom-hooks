@@ -1,9 +1,10 @@
 import cx from "./Header.module.scss";
+import { translate } from "../translations/translate";
 
 export const Header = ({ language, onLanguageChanged }) => {
   return (
     <header className={cx.container}>
-      <h1 className={cx.title}>Finance</h1>
+      <h1 className={cx.title}>{translate(language, "appTitle")}</h1>
 
       <select
         value={language}
