@@ -113,6 +113,7 @@ function App() {
             onSubmit={(entryIntent) =>
               handleEntryEdited(viewState.id, entryIntent)
             }
+            onDeleteEntry={() => handleEntryDeleted(viewState.id)}
           />
         )}
       </main>
