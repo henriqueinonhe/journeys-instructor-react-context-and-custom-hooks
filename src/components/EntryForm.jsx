@@ -32,9 +32,11 @@ export const EntryForm = ({ title, goToDashboard, onSubmit, entry }) => {
     };
 
     window.addEventListener("keydown", callback);
+    window.addEventListener("keyup", callback);
 
     return () => {
       window.removeEventListener("keydown", callback);
+      window.removeEventListener("keyup", callback);
     };
   }, []);
 
@@ -52,9 +54,11 @@ export const EntryForm = ({ title, goToDashboard, onSubmit, entry }) => {
     };
 
     window.addEventListener("keydown", callback);
+    window.addEventListener("keyup", callback);
 
     return () => {
       window.removeEventListener("keydown", callback);
+      window.removeEventListener("keyup", callback);
     };
   }, [label, amount, date]);
 
