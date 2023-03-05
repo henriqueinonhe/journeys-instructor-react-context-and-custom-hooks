@@ -6,11 +6,9 @@ import cx from "./App.module.scss";
 import { NewEntryForm } from "./components/NewEntryForm";
 import { EditEntryForm } from "./components/EditEntryForm";
 import { entriesStorage } from "./infrastructure/entriesStorage";
-import { LanguageContext } from "./context/LanguageContext";
+import { LanguageProvider } from "./context/LanguageProvider";
 
 function App() {
-  const [language, setLanguage] = useState("en");
-
   const [viewState, setViewState] = useState({
     name: "Dashboard",
   });
@@ -83,11 +81,8 @@ function App() {
   };
 
   return (
-    <LanguageContext.Provider value={language}>
-      <Header
-        language={language}
-        onLanguageChanged={(language) => setLanguage(language)}
-      />
+    <LanguageProvider>
+      <Header />
 
       <main className={cx.main}>
         {viewState.name === "Dashboard" && (
@@ -117,7 +112,7 @@ function App() {
           />
         )}
       </main>
-    </LanguageContext.Provider>
+    </LanguageProvider>
   );
 }
 
