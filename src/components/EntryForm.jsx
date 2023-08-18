@@ -1,11 +1,12 @@
 import { addMinutes, format } from "date-fns";
-import { useState, useId, useContext, useEffect } from "react";
+import { useState, useId, useContext } from "react";
 import { LanguageContext } from "../context/LanguageContext";
 import { translate } from "../translations/translate";
 import { BackButton } from "./BackButton";
 import cx from "./EntryForm.module.scss";
 import { Input } from "./Input";
 import { SaveButton } from "./SaveButton";
+import { useKeyPressed } from "../hooks/useKeyPressed";
 
 export const EntryForm = ({ title, goToDashboard, onSubmit, entry }) => {
   const initialLabel = entry?.label ?? "";
@@ -24,43 +25,18 @@ export const EntryForm = ({ title, goToDashboard, onSubmit, entry }) => {
 
   const language = useContext(LanguageContext);
 
-  useEffect(() => {
-    const callback = (event) => {
-      if (event.key === "Escape") {
-        goToDashboard();
-      }
+  useKeyPressed("Escape", () => {
+    goToDashboard();
+  });
+
+  useKeyPressed("Enter", () => {
+    const entryIntent = {
+      label,
+      amount: Number(amount),
+      date: addMinutes(new Date(date), new Date().getTimezoneOffset()),
     };
-
-    window.addEventListener("keydown", callback);
-    window.addEventListener("keyup", callback);
-
-    return () => {
-      window.removeEventListener("keydown", callback);
-      window.removeEventListener("keyup", callback);
-    };
-  }, []);
-
-  useEffect(() => {
-    const callback = (event) => {
-      if (event.key === "Enter") {
-        const entryIntent = {
-          label,
-          amount: Number(amount),
-          date: addMinutes(new Date(date), new Date().getTimezoneOffset()),
-        };
-
-        onSubmit(entryIntent);
-      }
-    };
-
-    window.addEventListener("keydown", callback);
-    window.addEventListener("keyup", callback);
-
-    return () => {
-      window.removeEventListener("keydown", callback);
-      window.removeEventListener("keyup", callback);
-    };
-  }, [label, amount, date]);
+    onSubmit(entryIntent);
+  });
 
   return (
     <>
