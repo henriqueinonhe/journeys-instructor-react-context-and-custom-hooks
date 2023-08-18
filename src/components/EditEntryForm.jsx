@@ -1,8 +1,6 @@
-import { useContext } from "react";
-import { LanguageContext } from "../context/LanguageContext";
-import { translate } from "../translations/translate";
 import { EntryForm } from "./EntryForm";
 import { useKeyPressed } from "../hooks/useKeyPressed";
+import { useTranslation } from "../hooks/useTranslation";
 
 export const EditEntryForm = ({
   onSubmit,
@@ -10,7 +8,7 @@ export const EditEntryForm = ({
   goToDashboard,
   onDeleteEntry,
 }) => {
-  const language = useContext(LanguageContext);
+  const { t } = useTranslation();
 
   useKeyPressed("Delete", () => {
     onDeleteEntry();
@@ -19,7 +17,7 @@ export const EditEntryForm = ({
 
   return (
     <EntryForm
-      title={translate(language, "editEntryFormTitle")}
+      title={t("editEntryFormTitle")}
       entry={entry}
       goToDashboard={goToDashboard}
       onSubmit={onSubmit}
