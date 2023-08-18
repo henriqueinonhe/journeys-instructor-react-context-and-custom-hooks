@@ -1,5 +1,5 @@
 import { addMinutes, format } from "date-fns";
-import { useState, useId, useContext } from "react";
+import { useState, useId, useContext, useEffect } from "react";
 import { LanguageContext } from "../context/LanguageContext";
 import { translate } from "../translations/translate";
 import { BackButton } from "./BackButton";
@@ -23,6 +23,20 @@ export const EntryForm = ({ title, goToDashboard, onSubmit, entry }) => {
   const dateId = useId();
 
   const language = useContext(LanguageContext);
+
+  useEffect(() => {
+    const callback = (event) => {
+      if (event.key === "Escape") {
+        goToDashboard();
+      }
+    };
+
+    window.addEventListener("keydown", callback);
+
+    return () => {
+      window.removeEventListener("keydown", callback);
+    };
+  }, []);
 
   return (
     <>
