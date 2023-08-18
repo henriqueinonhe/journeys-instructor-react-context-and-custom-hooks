@@ -38,6 +38,26 @@ export const EntryForm = ({ title, goToDashboard, onSubmit, entry }) => {
     };
   }, []);
 
+  useEffect(() => {
+    const callback = (event) => {
+      if (event.key === "Enter") {
+        const entryIntent = {
+          label,
+          amount: Number(amount),
+          date: addMinutes(new Date(date), new Date().getTimezoneOffset()),
+        };
+
+        onSubmit(entryIntent);
+      }
+    };
+
+    window.addEventListener("keydown", callback);
+
+    return () => {
+      window.removeEventListener("keydown", callback);
+    };
+  }, [label, amount, date]);
+
   return (
     <>
       <BackButton onClick={goToDashboard} />
