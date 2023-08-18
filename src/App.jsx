@@ -6,6 +6,7 @@ import cx from "./App.module.scss";
 import { NewEntryForm } from "./components/NewEntryForm";
 import { EditEntryForm } from "./components/EditEntryForm";
 import { entriesStorage } from "./infrastructure/entriesStorage";
+import { LanguageContext } from "./context/LanguageContext";
 
 function App() {
   const [language, setLanguage] = useState("en");
@@ -82,7 +83,7 @@ function App() {
   };
 
   return (
-    <>
+    <LanguageContext.Provider value={language}>
       <Header
         language={language}
         onLanguageChanged={(language) => setLanguage(language)}
@@ -95,7 +96,6 @@ function App() {
             onEntryEdit={goToEditEntry}
             onEntryDelete={handleEntryDeleted}
             onEntryNew={goToNewEntry}
-            language={language}
           />
         )}
 
@@ -103,7 +103,6 @@ function App() {
           <NewEntryForm
             onSubmit={handleNewEntrySubmitted}
             goToDashboard={goToDashboard}
-            language={language}
           />
         )}
 
@@ -114,11 +113,10 @@ function App() {
             onSubmit={(entryIntent) =>
               handleEntryEdited(viewState.id, entryIntent)
             }
-            language={language}
           />
         )}
       </main>
-    </>
+    </LanguageContext.Provider>
   );
 }
 
