@@ -20,9 +20,11 @@ export const EditEntryForm = ({
     };
 
     window.addEventListener("keydown", callback);
+    window.addEventListener("keyup", callback);
 
     return () => {
       window.removeEventListener("keydown", callback);
+      window.removeEventListener("keyup", callback);
     };
   }, []);
 
