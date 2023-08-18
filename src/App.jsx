@@ -95,6 +95,7 @@ function App() {
             onEntryEdit={goToEditEntry}
             onEntryDelete={handleEntryDeleted}
             onEntryNew={goToNewEntry}
+            language={language}
           />
         )}
 
@@ -102,6 +103,7 @@ function App() {
           <NewEntryForm
             onSubmit={handleNewEntrySubmitted}
             goToDashboard={goToDashboard}
+            language={language}
           />
         )}
 
@@ -112,6 +114,7 @@ function App() {
             onSubmit={(entryIntent) =>
               handleEntryEdited(viewState.id, entryIntent)
             }
+            language={language}
           />
         )}
       </main>

@@ -1,11 +1,18 @@
 import { addMinutes, format } from "date-fns";
 import { useState, useId } from "react";
+import { translate } from "../translations/translate";
 import { BackButton } from "./BackButton";
 import cx from "./EntryForm.module.scss";
 import { Input } from "./Input";
 import { SaveButton } from "./SaveButton";
 
-export const EntryForm = ({ title, goToDashboard, onSubmit, entry }) => {
+export const EntryForm = ({
+  title,
+  goToDashboard,
+  onSubmit,
+  entry,
+  language,
+}) => {
   const initialLabel = entry?.label ?? "";
   const initialAmount = entry?.amount?.toString() ?? "";
   const initialDate = entry
@@ -45,7 +52,7 @@ export const EntryForm = ({ title, goToDashboard, onSubmit, entry }) => {
             id={labelId}
             value={label}
             onChange={(event) => setLabel(event.target.value)}
-            label="Label"
+            label={translate(language, "labelInput")}
           />
         </div>
 
@@ -54,7 +61,7 @@ export const EntryForm = ({ title, goToDashboard, onSubmit, entry }) => {
             id={amountId}
             value={amount}
             onChange={(event) => setAmount(event.target.value)}
-            label="Amount"
+            label={translate(language, "amountInput")}
           />
         </div>
 
@@ -64,12 +71,12 @@ export const EntryForm = ({ title, goToDashboard, onSubmit, entry }) => {
             type="date"
             value={date}
             onChange={(event) => setDate(event.target.value)}
-            label="Date"
+            label={translate(language, "dateInput")}
           />
         </div>
 
         <div className={cx.saveButtonContainer}>
-          <SaveButton />
+          <SaveButton language={language} />
         </div>
       </form>
     </>

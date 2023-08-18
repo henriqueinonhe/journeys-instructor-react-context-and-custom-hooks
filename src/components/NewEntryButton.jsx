@@ -1,10 +1,11 @@
+import { translate } from "../translations/translate";
 import { Button } from "./Button";
 import cx from "./NewEntryButton.module.scss";
 
-export const NewEntryButton = ({ onClick }) => {
+export const NewEntryButton = ({ onClick, language }) => {
   return (
     <Button className={cx.container} onClick={onClick}>
-      ➕ New
+      ➕ {translate(language, "newEntryButton")}
     </Button>
   );
 };

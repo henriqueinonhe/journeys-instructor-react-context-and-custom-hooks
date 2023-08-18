@@ -8,6 +8,7 @@ export const Dashboard = ({
   onEntryNew,
   onEntryEdit,
   onEntryDelete,
+  language,
 }) => {
   const sortedEntries = entries.sort((first, second) =>
     isAfter(second.date, first.date) ? -1 : 1
@@ -16,7 +17,7 @@ export const Dashboard = ({
   return (
     <div>
       <div className={cx.newEntryButtonRow}>
-        <NewEntryButton onClick={onEntryNew} />
+        <NewEntryButton onClick={onEntryNew} language={language} />
       </div>
 
       <ul className={cx.entryList}>
