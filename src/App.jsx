@@ -3,10 +3,13 @@ import { Dashboard } from "./components/Dashboard";
 import { Header } from "./components/Header";
 import "./styles/global.scss";
 import cx from "./App.module.scss";
-import { EntryForm } from "./components/EntryForm";
+import { NewEntryForm } from "./components/NewEntryForm";
+import { EditEntryForm } from "./components/EditEntryForm";
 import { entriesStorage } from "./infrastructure/entriesStorage";
 
 function App() {
+  const [language, setLanguage] = useState("en");
+
   const [viewState, setViewState] = useState({
     name: "Dashboard",
   });
@@ -80,7 +83,10 @@ function App() {
 
   return (
     <>
-      <Header />
+      <Header
+        language={language}
+        onLanguageChanged={(language) => setLanguage(language)}
+      />
 
       <main className={cx.main}>
         {viewState.name === "Dashboard" && (
@@ -93,16 +99,14 @@ function App() {
         )}
 
         {viewState.name === "New Entry" && (
-          <EntryForm
-            title="New Entry"
+          <NewEntryForm
             onSubmit={handleNewEntrySubmitted}
             goToDashboard={goToDashboard}
           />
         )}
 
         {viewState.name === "Edit Entry" && (
-          <EntryForm
-            title="Edit Entry"
+          <EditEntryForm
             entry={entries.find((entry) => entry.id === viewState.id)}
             goToDashboard={goToDashboard}
             onSubmit={(entryIntent) =>
