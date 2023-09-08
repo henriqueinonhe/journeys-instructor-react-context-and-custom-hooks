@@ -23,8 +23,13 @@ export const entriesStorage = (() => {
     }));
   };
 
+  const clear = () => {
+    localStorage.removeItem("Entries");
+  };
+
   return {
     store,
     retrieve,
+    clear,
   };
 })();

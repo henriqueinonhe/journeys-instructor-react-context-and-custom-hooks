@@ -68,6 +68,7 @@ export const EntryForm = ({ title, onSubmit, entry }) => {
             value={label}
             onChange={(event) => setLabel(event.target.value)}
             label={t("labelInput")}
+            data-testid="labelInput"
           />
         </div>
 
@@ -77,6 +78,7 @@ export const EntryForm = ({ title, onSubmit, entry }) => {
             value={amount}
             onChange={(event) => setAmount(event.target.value)}
             label={t("amountInput")}
+            data-testid="amountInput"
           />
         </div>
 
@@ -87,6 +89,7 @@ export const EntryForm = ({ title, onSubmit, entry }) => {
             value={date}
             onChange={(event) => setDate(event.target.value)}
             label={t("dateInput")}
+            data-testid="dateInput"
           />
         </div>
 

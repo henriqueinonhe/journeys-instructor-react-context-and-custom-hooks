@@ -1,5 +1,4 @@
 import cx from "./DashboardEntry.module.scss";
-import { format } from "date-fns";
 import { Button } from "./Button";
 import { useTranslation } from "../hooks/useTranslation";
 import { useViewState } from "../hooks/useViewState";
@@ -12,25 +11,30 @@ export const DashboardEntry = ({ entry, onDelete }) => {
   const { formatDate, formatNumber } = useTranslation();
 
   return (
-    <li className={cx.container}>
+    <li className={cx.container} data-testid="dashboardEntry">
       <div className={cx.leftRow}>
-        <span>{label}</span>
+        <span data-testid="dashboardEntryLabel">{label}</span>
 
-        <span>{formatDate(date)}</span>
+        <span data-testid="dashboardEntryDate">{formatDate(date)}</span>
       </div>
 
       <div className={cx.rightRow}>
-        <span>$ {formatNumber(amount)}</span>
+        <span data-testid="dashboardEntryAmount">$ {formatNumber(amount)}</span>
 
         <div className={cx.buttonContainer}>
           <Button
             className={cx.editButton}
             onClick={() => goToEditEntry(entry.id)}
+            data-testid="dashboardEntryEditButton"
           >
             ✏️
           </Button>
 
-          <Button className={cx.deleteButton} onClick={onDelete}>
+          <Button
+            className={cx.deleteButton}
+            onClick={onDelete}
+            data-testid="dashboardEntryDeleteButton"
+          >
             🗑️
           </Button>
         </div>
