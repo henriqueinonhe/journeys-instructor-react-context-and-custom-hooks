@@ -1,4 +1,4 @@
-import { useContext, useRef } from "react";
+import { useContext } from "react";
 import { NotificationContext } from "../context/NotificationContext";
 import { wait } from "../utils/wait";
 
@@ -9,19 +9,22 @@ export const useNotification = () => {
     throw new Error("You forgot NotificationProvider!");
   }
 
-  const { state, setState, runIdRef } = value;
+  const { setState, runIdRef } = value;
 
   const showNotification = async (message) => {
     const runId = Math.random();
-    runIdRef.current = runId;
 
-    if (state.show) {
+    const anotherRunIsInProgress = () => runIdRef.current !== runId;
+
+    if (anotherRunIsInProgress()) {
       clearNotification();
     }
 
     await wait(300);
 
-    if (runId !== runIdRef.current) {
+    runIdRef.current = runId;
+
+    if (anotherRunIsInProgress()) {
       return;
     }
 
@@ -32,7 +35,7 @@ export const useNotification = () => {
 
     await wait(2000);
 
-    if (runId !== runIdRef.current) {
+    if (anotherRunIsInProgress()) {
       return;
     }
 
